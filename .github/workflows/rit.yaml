@@ -1,1 +1,12 @@
+name: first workflow
 
+on:
+  workflow_dispatch:
+
+jobs: 
+  my-first-job:
+    name: terraform install
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
