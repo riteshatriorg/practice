@@ -1,6 +1,6 @@
 resource_groups = {
   rg1 = {
-    name     = "rit-rg2"
+    name     = "rit-rg1"
     location = "North Europe"
   }
 
@@ -12,7 +12,7 @@ vnets = {
   vnet1 = {
     vnet_name     = "pahelavnet"
     location      = "North Europe"
-    rg_name       = "rit-rg2"
+    rg_name       = "rit-rg1"
     address_space = ["10.0.0.0/23"] # 512 addresses
     subnets = {
       subnet1 = {
@@ -43,7 +43,7 @@ nsg = {
   web_nsg = {
     nsg_name = "pahelansg"
     location = "North Europe"
-    rg_name  = "rit-rg2"
+    rg_name  = "rit-rg1"
 
     security_rules = {
       allow_http = {
@@ -73,7 +73,7 @@ nsg = {
   empty_rule_nsg = {
     nsg_name = "dusransg"
     location = "North Europe"
-    rg_name  = "rit-rg2"
+    rg_name  = "rit-rg1"
   }
 }
 
@@ -84,7 +84,7 @@ nsg = {
 nics = {
   nic1 = {
     nic_name    = "pahelanic"
-    rg_name     = "rit-rg2"
+    rg_name     = "rit-rg1"
     location    = "North Europe"
     vnet_name   = "pahelavnet"
     subnet_name = "pahelasubnet"
@@ -100,7 +100,7 @@ nics = {
 
   nic2 = {
     nic_name    = "dusranic"
-    rg_name     = "rit-rg2"
+    rg_name     = "rit-rg1"
     location    = "North Europe"
     vnet_name   = "pahelavnet"
     subnet_name = "dusrasubnet"
@@ -131,12 +131,12 @@ pips = {
   bastionpip = {
     pip_name = "bastionpip"
     location = "North Europe"
-    rg_name  = "rit-rg2"
+    rg_name  = "rit-rg1"
   }
   loadbalancer = {
     pip_name = "loadbalancerpip"
     location = "North Europe"
-    rg_name  = "rit-rg2"
+    rg_name  = "rit-rg1"
   }
 }
 
@@ -147,7 +147,7 @@ bastion = {
   bastion1 = {
     bastion_name = "pahelabastion"
     location     = "North Europe"
-    rg_name      = "rit-rg2"
+    rg_name      = "rit-rg1"
     vnet_name    = "pahelavnet"
     subnet_name  = "AzureBastionSubnet"
     pip_name     = "bastionpip"
@@ -165,12 +165,12 @@ nic_nsg_ids = {
   nic_nsg_1 = {
     nic_name = "pahelanic"
     nsg_name = "pahelansg"
-    rg_name  = "rit-rg2"
+    rg_name  = "rit-rg1"
   }
   nic_nsg_2 = {
     nic_name = "dusranic"
     nsg_name = "pahelansg"
-    rg_name  = "rit-rg2"
+    rg_name  = "rit-rg1"
   }
 }
 
@@ -181,7 +181,7 @@ nic_nsg_ids = {
 vms = {
   frontend = {
     vm_name                      = "frontendvm"
-    rg_name                      = "rit-rg2"
+    rg_name                      = "rit-rg1"
     location                     = "North Europe"
     vm_size                      = "Standard_B1s"
     admin_username               = "frontendvm"
@@ -206,7 +206,7 @@ vms = {
   }
   backend = {
     vm_name                      = "backendvm"
-    rg_name                      = "rit-rg2"
+    rg_name                      = "rit-rg1"
     location                     = "North Europe"
     vm_size                      = "Standard_B1s"
     admin_username               = "backendvm"
@@ -238,7 +238,7 @@ vms = {
 # sql_servers = {
 #   sqlserver1 = {
 #     sqlservername         = "ritsqlserver1q"
-#     rg_name               = "rit-rg2"
+#     rg_name               = "rit-rg1"
 #     location              = "North Europe"
 #     version               = "12.0"
 #     server_login_username = "server"
@@ -248,7 +248,7 @@ vms = {
 #   }
 #   sqlserver2 = {
 #     sqlservername         = "ritsqlserver2q"
-#     rg_name               = "rit-rg2"
+#     rg_name               = "rit-rg1"
 #     location              = "North Europe"
 #     version               = "12.0"
 #     server_login_username = "server"
@@ -264,7 +264,7 @@ vms = {
 sql_servers = {
   server1 = {
     sqlservername                 = "ritsqlserver1123"
-    rg_name                       = "rit-rg2"
+    rg_name                       = "rit-rg1"
     location                      = "North Europe"
     version                       = "12.0"
     server_login_username         = "server"
@@ -274,7 +274,7 @@ sql_servers = {
 
   # server2 = {
   #   sqlservername                 = "ritsqlserver12"
-  #   rg_name                       = "rit-rg2"
+  #   rg_name                       = "rit-rg1"
   #   location                      = "North Europe"
   #   version                       = "12.0"
   #   server_login_username         = "server"
@@ -311,13 +311,13 @@ sql_databases = {
   db1 = {
     name           = "appdb"
     server_name    = "ritsqlserver1123"
-    resource_group = "rit-rg2"
+    resource_group = "rit-rg1"
     sku_name       = "S0"
   }
   db2 = {
     name           = "analyticsdb"
     server_name    = "ritsqlserver1123"
-    resource_group = "rit-rg2"
+    resource_group = "rit-rg1"
     sku_name       = "S1"
     max_size_gb    = 20
     zone_redundant = false
@@ -329,7 +329,7 @@ sql_databases = {
 
 azurerm_lb_rb = {
   lb1 = {
-    rg_name  = "rit-rg2"
+    rg_name  = "rit-rg1"
     pip_name = "loadbalancerpip"
     lb_name  = "rit-loadbalancer"
     location = "North Europe"
@@ -345,7 +345,7 @@ azurerm_lb_rb = {
 backend_ap_rb = {
   bap1 = {
     lb_name           = "rit-loadbalancer"
-    rg_name           = "rit-rg2"
+    rg_name           = "rit-rg1"
     backend_pool_name = "rit-backend-pool"
   }
 }
@@ -353,17 +353,17 @@ backend_ap_rb = {
 nic_bp_association = {
   firstassociation = {
     nic_name                  = "pahelanic"
-    nic_rg_name               = "rit-rg2"
+    nic_rg_name               = "rit-rg1"
     lb_name                   = "rit-loadbalancer"
-    rg_name                   = "rit-rg2"
+    rg_name                   = "rit-rg1"
     backend_address_pool_name = "rit-backend-pool"
     nic_ka_ip_config_name     = "pahela-internal"
   }
   secondassociation = {
     nic_name                  = "dusranic"
-    nic_rg_name               = "rit-rg2"
+    nic_rg_name               = "rit-rg1"
     lb_name                   = "rit-loadbalancer"
-    rg_name                   = "rit-rg2"
+    rg_name                   = "rit-rg1"
     backend_address_pool_name = "rit-backend-pool"
     nic_ka_ip_config_name     = "dusra-internal"
   }
@@ -374,7 +374,7 @@ lb_probe = {
     probe_name     = "rit-health-probe"
     probe_protocol = "Tcp"
     probe_port     = 80
-    rg_name        = "rit-rg2"
+    rg_name        = "rit-rg1"
     lb_name        = "rit-loadbalancer"
   }
 }
@@ -382,7 +382,7 @@ lb_probe = {
 lb_rule = {
   lb1 = {
     lb_name                         = "rit-loadbalancer"
-    rg_name                         = "rit-rg2"
+    rg_name                         = "rit-rg1"
     backend_address_pool_db_ka_name = "rit-backend-pool"
     lb_rule_name                    = "rit-lb-rule"
     protocol                        = "Tcp"
