@@ -1,12 +1,77 @@
-name: first workflow
+name: "Ritesh first githubaction workflow"
 
 on:
-  workflow_dispatch
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main      
 
+permissions:
+  id-token: write
+  contents: read
+  
 jobs: 
-  my-first-job:
-    name: terraform install
+  terraform-init-plan:
     runs-on: self-hosted
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+    
+      - name: Azure Login
+        uses: Azure/login@v2.3.0
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+            
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+        working-directory: infra/
+        
+      - name: Terraform Init
+        id: init
+        run: terraform init -input=false  
+        working-directory: infra/
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate 
+        working-directory: infra/        
+      
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -input=false
+        continue-on-error: true
+        working-directory: infra/    
+        
+  terraform-apply:    
+    runs-on: self-hosted
+    if: github.ref == 'refs/heads/main'
+    needs: terraform-init-plan
+    environment: hrutviatri
     steps:
       - name: Checkout
         uses: actions/checkout@v5.0.0
+    
+      - name: Azure Login
+        uses: Azure/login@v2.3.0
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}   
+          
+      - name: Terraform Init
+        id: init
+        run: terraform init -input=false  
+        working-directory: infra/
+
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply --auto-approve
+        continue-on-error: true
+        working-directory: infra/              
+          
