@@ -78,7 +78,7 @@ jobs:
         working-directory: infra/              
       
       - name: Terraform Destroy
-        id: apply
+        id: destroy
         run: terraform destroy --auto-approve
         continue-on-error: true
         working-directory: infra/  
