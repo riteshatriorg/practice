@@ -1,7 +1,7 @@
 name: "Ritesh first githubaction workflow"
 
 on:
-  workflow_dispatch:
+  workflow_dispatch
   pull_request:
     branches:
       - main
