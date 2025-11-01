@@ -6,7 +6,6 @@ module "rg_module" {
   location = each.value.location
 }
 
-
 module "vnet_module" {
   source     = "../modules/networking/azurerm_virtual_network"
   depends_on = [module.rg_module]
